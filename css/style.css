@@ -50,7 +50,8 @@ header button {
 	display: flex;
 	justify-content: center;
 	flex-wrap: wrap;
-	width: 100%;
+	width: 85%;
+	margin: 0 auto;
 	box-sizing: border-box;
 	text-overflow: ellipsis;
 }
@@ -75,7 +76,8 @@ header button {
 
 .bands-submit {
 	padding: .5em;
-	font-size: 2em;
+	font-size: 1em;
+
 }
 
 #calendar {

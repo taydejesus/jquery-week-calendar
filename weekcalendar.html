@@ -35,7 +35,7 @@
 </head>
 <body>
   <header>
-    <h1>Your Events</h1>
+    <h1>Event Discovery Platform</h1>
 
     <!--Add buttons to initiate auth sequence and sign out-->
     <button id="authorize-button" style="display: none;">Sign In</button>
@@ -52,7 +52,7 @@
     </div>
     <div class="date-input">
       <h2>Date</h2>
-      <input type="text" value="" id="date-req">
+      <input type="datetime-local" value="" id="date-req">
     </div>
 
     <div class="keyword-input">
@@ -61,6 +61,7 @@
     </div>
     <button class="bands-submit">Submit</button>
   </div>
+
   <div class="container results">
     <div class="result-head band-name">
       Event Name
