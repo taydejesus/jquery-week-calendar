@@ -214,6 +214,7 @@ var calendarEvents = {
           apikey: tmKey,
         },
         success: function(response) {
+
           var events = response._embedded.events;
           console.log(events);
           for(let i = 0; i < events.length; i++) {
@@ -302,7 +303,7 @@ var calendarEvents = {
       var location = $("#user-location").val();
       var date = $("#date-req").val();
       var keywords = $("#user-keyword").val();
-
+      $('.result').remove();
       scrollResults();
       findConcerts(location, date, keywords);
     });
