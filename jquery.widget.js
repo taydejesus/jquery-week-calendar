@@ -210,6 +210,7 @@ var calendarEvents = {
         data: {
           keyword: keywords,
           countryCode: loc,
+          startDateTime: date,
           apikey: tmKey,
         },
         success: function(response) {
@@ -231,8 +232,8 @@ var calendarEvents = {
 
             var bandName = events[i].name;
             var url = events[i].url;
-            var saleStart = events[i].sales.public.startDateTime;
-            var saleStop = events[i].sales.public.endDateTime;
+            var saleStart = new Date(events[i].sales.public.startDateTime);
+            var saleStop = new Date(events[i].sales.public.endDateTime);
             var eventDate = undefined;
             if (events[i].dates.start.dateTBD === "true") {
               eventDate = "TBD"
@@ -248,7 +249,9 @@ var calendarEvents = {
 
             var venueLat = events[i]._embedded.venues[0].location.latitude;
             var venueLong = events[i]._embedded.venues[0].location.longitude;
-
+            saleStart = `${saleStart.getMonth()}/${saleStart.getDate()}/${saleStart.getFullYear()} + ${saleStart.getHours()}:${saleStart.getMinutes()}`;
+            saleStop = `${saleStop.getMonth()}/${saleStop.getDate()}/${saleStop.getFullYear()} + ${saleStop.getHours()}:${saleStop.getMinutes()}`;
+          
             newBand.append(bandName);
             newDate.append(eventDate);
             newGenre.append(genre);
@@ -256,7 +259,7 @@ var calendarEvents = {
             newSaleStart.append(saleStart);
             newSaleEnd.append(saleStop);
             newSeatmap.append(seatmap);
-            newPrice.append($(`<h5>${priceMin} - ${priceMax}</h5>`));
+            newPrice.append($(`<h5>$${priceMin} - ${priceMax}</h5>`));
             newAddEvent.append($("<h5> add to calendar </h5>"));
             newPurchase.append($("<h5> buy tix </h5>"));
 
@@ -278,7 +281,7 @@ var calendarEvents = {
     //create scrollable list of results
     function scrollResults() {
       console.log("Scrolling");
-      $(".results").css('height', '10em');
+      $(".results").css('height', '20em');
       console.log($(".results").css('height'))
       $(".results").css('overflow-y', 'scroll');
     };
