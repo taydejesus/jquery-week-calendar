@@ -13,19 +13,6 @@
     margin: 0;
   }
 
-  h1 {
-    margin: 0 0 1em;
-    padding: 0.5em;
-  }
-
-  p.description {
-    font-size: 0.8em;
-    padding: 1em;
-    position: absolute;
-    top: 3.2em;
-    margin-right: 400px;
-  }
-
   #message {
     font-size: 0.7em;
     position: absolute;
@@ -47,14 +34,17 @@
 
 </head>
 <body>
-  <h1>Your Events</h1>
+  <header>
+    <h1>Your Events</h1>
 
     <!--Add buttons to initiate auth sequence and sign out-->
-  <button id="authorize-button" style="display: none;">Sign In</button>
-  <button id="signout-button" style="display: none;">Sign Out</button>
+    <button id="authorize-button" style="display: none;">Sign In</button>
+    <button id="signout-button" style="display: none;">Sign Out</button>
+  </header>
 
   <pre id="content"></pre>
-  
+
+
   <div class = "container discovery">
     <div class="loc-input">
       <h2>Location</h2>
@@ -69,9 +59,8 @@
       <h2>Keywords</h2>
       <input type="text" value="" id="user-keyword">
     </div>
-    <button class="bands-submit">Submit Bands Request</button>
+    <button class="bands-submit">Submit</button>
   </div>
-
   <div class="container results">
     <div class="result-head band-name">
       Event Name

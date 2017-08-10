@@ -26,7 +26,7 @@
 
       var authorizeButton = document.getElementById('authorize-button');
       var signoutButton = document.getElementById('signout-button');
-    
+
       /**
        *  On load, called to load the auth2 library and API client library.
        */
@@ -61,10 +61,10 @@
       function updateSigninStatus(isSignedIn) {
         if (isSignedIn) {
           authorizeButton.style.display = 'none';
-          signoutButton.style.display = 'block';
+          signoutButton.style.display = 'inline-block';
           listUpcomingEvents();
         } else {
-          authorizeButton.style.display = 'block';
+          authorizeButton.style.display = 'inline-block';
           signoutButton.style.display = 'none';
         }
       }

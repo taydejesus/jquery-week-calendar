@@ -16,7 +16,7 @@ $(function() {
 				countryCode: loc,
 				apikey: tmKey,
 			},
-			success: function(response) { 
+			success: function(response) {
 				var events = response._embedded.events;
 				console.log(events);
 				for(let i = 0; i < events.length; i++) {
@@ -75,16 +75,28 @@ $(function() {
 					$(".results").append(newAddEvent);
 					$(".results").append(newPurchase);
 				}
+
+
 			}
+
 		});
 
 	}
 
+	//create scrollable list of results
+	function scrollResults() {
+		console.log("Scrolling");
+		$(".results").css('height', '10em');
+		console.log($(".results").css('height'))
+		$(".results").css('overflow-y', 'scroll');
+	};
+
 	$('button.bands-submit').click(function() {
 		var location = $("#user-location").val();
 		var date = $("#date-req").val();
-		var keywords = $("#user-keyword").val(); 
+		var keywords = $("#user-keyword").val();
 
+		scrollResults();
 		findConcerts(location, date, keywords);
 	});
 

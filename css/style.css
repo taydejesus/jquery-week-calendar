@@ -4,6 +4,7 @@
 
 h1 {
 	color: #2E4052;
+	display: inline-block;
 }
 
 h2 {
@@ -28,6 +29,11 @@ button {
 	padding: 2em;
 }
 
+header button {
+	float: right;
+	margin: 1em;
+}
+
 .result-head {
 	background-color: #A9BCD0;
 }
@@ -39,10 +45,11 @@ button {
 	margin: 2em;
 }
 .results {
+	border: 1px solid black;
 	display: flex;
 	justify-content: center;
 	flex-wrap: wrap;
-	width: 80%;
+	width: 100%;
 	box-sizing: border-box;
 }
 .result-head {
@@ -57,4 +64,9 @@ button {
 	box-sizing: border-box;
 	border: 2px solid black;
 	text-align: center;
+}
+
+.bands-submit {
+	padding: .5em;
+	font-size: 2em;
 }
