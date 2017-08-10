@@ -100,4 +100,9 @@ $(function() {
 		findConcerts(location, date, keywords);
 	});
 
+	$(".wc-day-column-header").click(function() {
+		//which day was clicked?
+		//search that day
+	});
+
 });
