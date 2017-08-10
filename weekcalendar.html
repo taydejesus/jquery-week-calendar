@@ -41,80 +41,20 @@
 
   <script type='text/javascript' src='libs/jquery-1.4.4.min.js'></script>
   <script type='text/javascript' src='libs/jquery-ui-1.8.11.custom.min.js'></script>
-
   <script type="text/javascript" src="libs/date.js"></script>
   <script type='text/javascript' src='jquery.weekcalendar.js'></script>
-  <script type='text/javascript'>
-  var year = new Date().getFullYear();
-  var month = new Date().getMonth();
-  var day = new Date().getDate();
+  <script src="https://apis.google.com/js/api.js"></script>
 
-  var eventData = {
-    events : [
-      {'id':1, 'start': new Date(year, month, day, 12), 'end': new Date(year, month, day, 13, 35),'title':'Lunch with Mike'},
-      {'id':2, 'start': new Date(year, month, day, 14), 'end': new Date(year, month, day, 14, 45),'title':'Dev Meeting'},
-      {'id':3, 'start': new Date(year, month, day + 1, 18), 'end': new Date(year, month, day + 1, 18, 45),'title':'Hair cut'},
-      {'id':4, 'start': new Date(year, month, day - 1, 8), 'end': new Date(year, month, day - 1, 9, 30),'title':'Team breakfast'},
-      {'id':5, 'start': new Date(year, month, day + 1, 14), 'end': new Date(year, month, day + 1, 15),'title':'Product showcase'}
-    ]
-  };
-
-  $(document).ready(function() {
-    $('#calendar').weekCalendar({
-      timeslotsPerHour: 6,
-      timeslotHeigh: 30,
-      hourLine: true,
-      data: eventData,
-      height: function($calendar) {
-        return $(window).height() - $('h1').outerHeight(true);
-      },
-      eventRender : function(calEvent, $event) {
-        if (calEvent.end.getTime() < new Date().getTime()) {
-          $event.css('backgroundColor', '#aaa');
-          $event.find('.time').css({'backgroundColor': '#999', 'border':'1px solid #888'});
-        }
-      },
-      eventNew: function(calEvent, $event) {
-        displayMessage('<strong>Added event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
-        alert('You\'ve added a new event. You would capture this event, add the logic for creating a new event with your own fields, data and whatever backend persistence you require.');
-      },
-      eventDrop: function(calEvent, $event) {
-        displayMessage('<strong>Moved Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
-      },
-      eventResize: function(calEvent, $event) {
-        displayMessage('<strong>Resized Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
-      },
-      eventClick: function(calEvent, $event) {
-        displayMessage('<strong>Clicked Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
-      },
-      eventMouseover: function(calEvent, $event) {
-        displayMessage('<strong>Mouseover Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
-      },
-      eventMouseout: function(calEvent, $event) {
-        displayMessage('<strong>Mouseout Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
-      },
-      noEvents: function() {
-        displayMessage('There are no events for this week');
-      }
-    });
-
-    function displayMessage(message) {
-      $('#message').html(message).fadeIn();
-    }
-
-    $('<div id="message" class="ui-corner-all"></div>').prependTo($('body'));
-  });
-
-</script>
 </head>
 <body>
   <h1>Your Events</h1>
 
-  <p class="description">
-    This is Ashish and Taylor's project!!! It has a calendar on it.
-    That is how you know it's good.
-  </p>
+    <!--Add buttons to initiate auth sequence and sign out-->
+  <button id="authorize-button" style="display: none;">Sign In</button>
+  <button id="signout-button" style="display: none;">Sign Out</button>
 
+  <pre id="content"></pre>
+  
   <div class = "container discovery">
     <div class="loc-input">
       <p>Location</p>
@@ -180,6 +120,7 @@
     src="http://code.jquery.com/jquery-3.2.1.min.js"
     integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
     crossorigin="anonymous"></script> -->
+      <script type='text/javascript' src="jquery.widget.js"></script>
   <script type="text/javascript" src="js/script.js"></script>
 </body>
 </html>

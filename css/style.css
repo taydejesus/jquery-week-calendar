@@ -2,7 +2,7 @@
 	display: flex;
 	justify-content: center;
 	flex-wrap: wrap;
-	width: 80%;
+	width: 100%;
 	box-sizing: border-box;
 }
 .result-head {
@@ -17,4 +17,8 @@
 	box-sizing: border-box;
 	border: 2px solid black;
 	text-align: center;
+}
+
+#calendar {
+	width: 100%;
 }
