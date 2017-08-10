@@ -217,6 +217,7 @@ var calendarEvents = {
           apikey: tmKey,
         },
         success: function(response) {
+
           var events = response._embedded.events;
           console.log(events);
           for(let i = 0; i < events.length; i++) {
@@ -241,19 +242,31 @@ var calendarEvents = {
             if (events[i].dates.start.dateTBD === "true") {
               eventDate = "TBD"
             } else {
-              eventDate = events[i].dates.start.dateTime;
+              eventDate = new Date(events[i].dates.start.dateTime);
             }
+
+            var viewMap = $("<a>")
+            viewMap.attr("href", events[i].seatmap.staticUrl);
+            viewMap.text("View")
+
+            var buyTicket = $("<a>");
+            buyTicket.attr("href", url);
+            buyTicket.text("Buy Ticket");
+
+            var addCalendar = $("<a>");
+            addCalendar.attr("href", "");
+            addCalendar.text("Add to Calendar");
 
             var genre = events[i].classifications[0].genre.name;
             var priceMin = events[i].priceRanges[0].min;
             var priceMax = events[i].priceRanges[0].max;
-            var seatmap = events[i].seatmap.staticUrl;
             var venue = events[i]._embedded.venues[0].name;
 
             var venueLat = events[i]._embedded.venues[0].location.latitude;
             var venueLong = events[i]._embedded.venues[0].location.longitude;
-            saleStart = `${saleStart.getMonth()}/${saleStart.getDate()}/${saleStart.getFullYear()} + ${saleStart.getHours()}:${saleStart.getMinutes()}`;
-            saleStop = `${saleStop.getMonth()}/${saleStop.getDate()}/${saleStop.getFullYear()} + ${saleStop.getHours()}:${saleStop.getMinutes()}`;
+            eventDate = `${eventDate.getMonth()}/${eventDate.getDate()}/${eventDate.getFullYear()}  ${eventDate.getHours()}:${eventDate.getMinutes()}`;
+            saleStart = `${saleStart.getMonth()}/${saleStart.getDate()}/${saleStart.getFullYear()}  ${saleStart.getHours()}:${saleStart.getMinutes()}`;
+            saleStop = `${saleStop.getMonth()}/${saleStop.getDate()}/${saleStop.getFullYear()}  ${saleStop.getHours()}:${saleStop.getMinutes()}`;
 
             newBand.append(bandName);
             newDate.append(eventDate);
@@ -261,10 +274,10 @@ var calendarEvents = {
             newVenue.append(venue);
             newSaleStart.append(saleStart);
             newSaleEnd.append(saleStop);
-            newSeatmap.append(seatmap);
+            newSeatmap.append(viewMap);
             newPrice.append($(`<h5>$${priceMin} - ${priceMax}</h5>`));
-            newAddEvent.append($("<h5> add to calendar </h5>"));
-            newPurchase.append($("<h5> buy tix </h5>"));
+            newAddEvent.append(addCalendar);
+            newPurchase.append(buyTicket);
 
             $(".results").append(newBand);
             $(".results").append(newDate);
@@ -293,7 +306,7 @@ var calendarEvents = {
       var location = $("#user-location").val();
       var date = $("#date-req").val();
       var keywords = $("#user-keyword").val();
-
+      $('.result').remove();
       scrollResults();
       findConcerts(location, date, keywords);
     });
