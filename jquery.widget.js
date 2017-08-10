@@ -314,7 +314,7 @@ var calendarEvents = {
       		console.log('header i',dateHeader[i])
       		dateHeader[i].addEventListener('click', () => {
       			//console.log(event.target.nodeName);
-      			console.log("Clicked")
+      			console.log("Clicked");
       			//which day was clicked?
       			//search that day
       		});
