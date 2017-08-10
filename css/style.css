@@ -1,8 +1,20 @@
 .results {
 	display: flex;
-	justify-content: space-between;
+	justify-content: center;
+	flex-wrap: wrap;
+	width: 80%;
+	box-sizing: border-box;
 }
+.result-head {
+	width: 10%;
+	text-align: center;
+	box-sizing: border-box;
+	border: 1px solid black;
+}
+
 .result {
 	width: 10%;
+	box-sizing: border-box;
+	border: 2px solid black;
 	text-align: center;
 }
