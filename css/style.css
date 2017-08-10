@@ -18,3 +18,23 @@
 	border: 2px solid black;
 	text-align: center;
 }
+
+h1 {
+	color: #2E4052;
+}
+
+h2 {
+	color: #F4996B;
+}
+
+body {
+	background-color: #EDEEF2;
+	text-align: center;
+}
+
+.discovery {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	margin: 2em;
+}
