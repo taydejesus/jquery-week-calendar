@@ -96,9 +96,6 @@ var calendarEvents = {
           'orderBy': 'startTime'
         }).then(function(response) {
           var events = response.result.items;
-          console.log("EVENTS");
-          console.log(events);
-          appendPre('Upcoming events:');
 
          var year = new Date().getFullYear();
           var month = new Date().getMonth();
@@ -129,7 +126,7 @@ var calendarEvents = {
               console.log(summary);
               console.log(startTime);
               console.log(endTime);
-              appendPre(event.summary + ' (' + start + ')')
+              // appendPre(event.summary + ' (' + start + ')')
             }
           } else {
             appendPre('No upcoming events found.');
@@ -156,7 +153,7 @@ var calendarEvents = {
         },
         eventNew: function(calEvent, $event) {
           displayMessage('<strong>Added event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
-          alert('You\'ve added a new event. You would capture this event, add the logic for creating a new event with your own fields, data and whatever backend persistence you require.');
+          // alert('You\'ve added a new event. You would capture this event, add the logic for creating a new event with your own fields, data and whatever backend persistence you require.');
         },
         eventDrop: function(calEvent, $event) {
           displayMessage('<strong>Moved Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
@@ -168,10 +165,10 @@ var calendarEvents = {
           displayMessage('<strong>Clicked Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
         },
         eventMouseover: function(calEvent, $event) {
-          displayMessage('<strong>Mouseover Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
+          // displayMessage('<strong>Mouseover Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
         },
         eventMouseout: function(calEvent, $event) {
-          displayMessage('<strong>Mouseout Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
+          // displayMessage('<strong>Mouseout Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
         },
         noEvents: function() {
           displayMessage('There are no events for this week');

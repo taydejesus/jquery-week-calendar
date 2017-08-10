@@ -14,6 +14,7 @@ h2 {
 body {
 	background-color: #EDEEF2;
 	text-align: center;
+	font-size: 16px;
 }
 
 input {
@@ -51,6 +52,7 @@ header button {
 	flex-wrap: wrap;
 	width: 100%;
 	box-sizing: border-box;
+	text-overflow: ellipsis;
 }
 .result-head {
 	width: 10%;
@@ -65,9 +67,22 @@ header button {
 	box-sizing: border-box;
 	border: 2px solid black;
 	text-align: center;
+	
+	white-space: wrap;
+  	overflow: hidden;
+  	font-size: 0.8em;
 }
 
 .bands-submit {
 	padding: .5em;
 	font-size: 2em;
+}
+
+#calendar {
+	width: 70%;
+	padding-top: 50px;
+	margin: 0 auto;
+	height: 800px;
+	overflow-y: scroll;
+
 }
