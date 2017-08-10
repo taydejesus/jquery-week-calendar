@@ -1,0 +1,8 @@
+.results {
+	display: flex;
+	justify-content: space-between;
+}
+.result {
+	width: 10%;
+	text-align: center;
+}
