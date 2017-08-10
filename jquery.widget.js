@@ -137,19 +137,22 @@ var calendarEvents = {
           dateHeaderClicks();
         });
       }
+
+
       function dateHeaderClicks() {
-      	var dateHeader = document.getElementsByClassName("wc-day-column-header");
-      	console.log('header len',dateHeader.length);
-      	for (var i=0; i<dateHeader.length; i++) {
-      		console.log('header i',dateHeader[i])
-      		dateHeader[i].addEventListener('click', () => {
-      			//console.log(event.target.nodeName);
-      			console.log("Clicked")
-      			//which day was clicked?
-      			//search that day
-      		});
-      	}
+        	var dateHeader = document.getElementsByClassName("wc-day-column-header");
+        	for (const date of dateHeader) {
+        		date.addEventListener('click', () => {
+        			//get date of clicked item
+                //get text after <br>
+                //parse to date format
+        			//search date
+              //create table
+      		  });
+      	  }
       }
+
+
 
  function makeCal() {
       $('#calendar').weekCalendar({
@@ -251,7 +254,7 @@ var calendarEvents = {
             var venueLong = events[i]._embedded.venues[0].location.longitude;
             saleStart = `${saleStart.getMonth()}/${saleStart.getDate()}/${saleStart.getFullYear()} + ${saleStart.getHours()}:${saleStart.getMinutes()}`;
             saleStop = `${saleStop.getMonth()}/${saleStop.getDate()}/${saleStop.getFullYear()} + ${saleStop.getHours()}:${saleStop.getMinutes()}`;
-          
+
             newBand.append(bandName);
             newDate.append(eventDate);
             newGenre.append(genre);
@@ -295,19 +298,7 @@ var calendarEvents = {
       findConcerts(location, date, keywords);
     });
 
-    function dateHeaderClicks() {
-      	var dateHeader = document.getElementsByClassName("wc-day-column-header");
-      	console.log('header len',dateHeader.length);
-      	for (var i=0; i<dateHeader.length; i++) {
-      		console.log('header i',dateHeader[i])
-      		dateHeader[i].addEventListener('click', () => {
-      			//console.log(event.target.nodeName);
-      			console.log("Clicked");
-      			//which day was clicked?
-      			//search that day
-      		});
-      	}
-      }
+
 
 
     $('<div id="message" class="ui-corner-all"></div>').prependTo($('body'));
