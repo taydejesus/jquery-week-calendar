@@ -1,3 +1,40 @@
+
+h1 {
+	color: #2E4052;
+}
+
+h2 {
+	color: #F4996B;
+}
+
+body {
+	background-color: #EDEEF2;
+	text-align: center;
+}
+
+input {
+	margin: 0 2em;
+	border: 2px solid #2E4052;
+}
+
+button {
+	background-color: #2E4052;
+	color: #fff;
+	border-radius: 8px;
+	border: 0;
+	padding: 2em;
+}
+
+.result-head {
+	background-color: #A9BCD0;
+}
+
+.discovery {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	margin: 2em;
+}
 .results {
 	display: flex;
 	justify-content: center;
@@ -17,24 +54,4 @@
 	box-sizing: border-box;
 	border: 2px solid black;
 	text-align: center;
-}
-
-h1 {
-	color: #2E4052;
-}
-
-h2 {
-	color: #F4996B;
-}
-
-body {
-	background-color: #EDEEF2;
-	text-align: center;
-}
-
-.discovery {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	margin: 2em;
 }
