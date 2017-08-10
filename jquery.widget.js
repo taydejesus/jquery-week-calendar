@@ -295,6 +295,20 @@ var calendarEvents = {
       findConcerts(location, date, keywords);
     });
 
+    function dateHeaderClicks() {
+      	var dateHeader = document.getElementsByClassName("wc-day-column-header");
+      	console.log('header len',dateHeader.length);
+      	for (var i=0; i<dateHeader.length; i++) {
+      		console.log('header i',dateHeader[i])
+      		dateHeader[i].addEventListener('click', () => {
+      			//console.log(event.target.nodeName);
+      			console.log("Clicked")
+      			//which day was clicked?
+      			//search that day
+      		});
+      	}
+      }
+
 
     $('<div id="message" class="ui-corner-all"></div>').prependTo($('body'));
   });
