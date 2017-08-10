@@ -6,6 +6,7 @@
 .wc-toolbar {
   padding: 1em;
   font-size:0.8em;
+  background-color: #FFD07A;
 }
 
 .wc-toolbar .wc-nav {
@@ -66,7 +67,7 @@
   overflow:hidden;
 }
 .wc-grid-timeslot-header {
-    background: #eee;
+    background: #FFD07A;
 }
 
 
@@ -172,13 +173,13 @@ table.wc-time-slots {
 }
 
 .wc-hour-end, .wc-hour-header {
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #A9BCD0;
     color: #555;
 }
 
 .wc-business-hours {
     background-color: #E6EEF1;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #A9BCD0;
     color: #333;
     font-size: 1.4em;
 }
@@ -229,7 +230,7 @@ table.wc-time-slots {
 }
 
 .wc-cal-event .wc-time {
-    background-color: #2b72d0;
+    background-color: #2E4052;
     border: 1px solid #1b62c0;
     color: #fff;
     padding: 0;

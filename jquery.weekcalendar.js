@@ -18,7 +18,16 @@
  *
  * If you're after a monthly calendar plugin, check out this one :
  * http://arshaw.com/fullcalendar/
+ *
+ * Edited by Taylor on August 10, 2017 :)
  */
+
+
+
+
+ /*
+  * Below here is not my business. Leave this.
+  */
 
 (function($) {
   // check the jquery version
@@ -81,7 +90,7 @@
         resizable: function(calEvent, element) {
           return true;
         },
-        eventClick: function(calEvent, element, dayFreeBusyManager, 
+        eventClick: function(calEvent, element, dayFreeBusyManager,
                                                       calendar, clickEvent) {
         },
         eventRender: function(calEvent, element) {
@@ -99,14 +108,14 @@
         },
         eventResize: function(calEvent, element) {
         },
-        eventNew: function(calEvent, element, dayFreeBusyManager, 
+        eventNew: function(calEvent, element, dayFreeBusyManager,
                                                     calendar, mouseupEvent) {
         },
         eventMouseover: function(calEvent, $event) {
         },
         eventMouseout: function(calEvent, $event) {
         },
-        eventDelete: function(calEvent, element, dayFreeBusyManager, 
+        eventDelete: function(calEvent, element, dayFreeBusyManager,
                                                       calendar, clickEvent) {
             calendar.weekCalendar('removeEvent',calEvent.id);
 	},
