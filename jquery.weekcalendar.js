@@ -22,9 +22,6 @@
  * Edited by Taylor on August 10, 2017 :)
  */
 
-
-
-
  /*
   * Below here is not my business. Leave this.
   */
