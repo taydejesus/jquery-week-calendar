@@ -98,7 +98,7 @@ var calendarEvents = {
         }).then(function(response) {
           var events = response.result.items;
 
-         var year = new Date().getFullYear();
+          var year = new Date().getFullYear();
           var month = new Date().getMonth();
           var day = new Date().getDate();
 
@@ -122,12 +122,13 @@ var calendarEvents = {
               tempObject.start = startTime;
               tempObject.end = endTime;
               tempObject.title = summary;
-              calendarEvents.events.push(tempObject);
+              //Check if this event and time are in the existing list of objects. 
+              if((isInCalendar(tempObject.title, tempObject.start)) === false) {
+                calendarEvents.events.push(tempObject);
+                console.log("Added");
+              }
+              // calendarEvents.events.push(tempObject);
 
-              console.log(summary);
-              console.log(startTime);
-              console.log(endTime);
-              // appendPre(event.summary + ' (' + start + ')')
             }
           } else {
             appendPre('No upcoming events found.');
@@ -137,6 +138,16 @@ var calendarEvents = {
           makeCal();
           dateHeaderClicks();
         });
+      }
+
+      function isInCalendar(title, startTime) {
+        for (let i = 0; i < calendarEvents.events.length; i++) {
+          if ((calendarEvents.events[i].title === title) & (calendarEvents.events[i].start.getTime() === startTime.getTime())) {
+            console.log("FOUND A MATCH");
+            return true;
+          }
+        }
+        return false;
       }
 
       function dateHeaderClicks() {
@@ -159,6 +170,8 @@ var calendarEvents = {
       }
 
  function makeCal() {
+      console.log("In here, ");
+      console.log(calendarEvents.events);
       $('#calendar').weekCalendar({
         timeslotsPerHour: 6,
         timeslotHeigh: 30,
@@ -258,8 +271,8 @@ var calendarEvents = {
             buyTicket.text("Buy Ticket");
 
             var addCalendar = $("<a>");
-            addCalendar.attr("href", "");
             addCalendar.text("Add to Calendar");
+            addCalendar.click(function() {addNewEvent(newBand, eventDate)});
 
             var genre = events[i].classifications[0].genre.name;
             var priceMin = events[i].priceRanges[0].min;
@@ -279,7 +292,7 @@ var calendarEvents = {
             newSaleStart.append(saleStart);
             newSaleEnd.append(saleStop);
             newSeatmap.append(viewMap);
-            newPrice.append($(`<h5>$${priceMin} - ${priceMax}</h5>`));
+            newPrice.append($(`<h5>$${priceMin} - $${priceMax}</h5>`));
             newAddEvent.append(addCalendar);
             newPurchase.append(buyTicket);
 
@@ -298,6 +311,39 @@ var calendarEvents = {
       });
     }
 
+    function addNewEvent(eventTitle, eventDate) {
+        console.log('here');
+
+        var newEvent = {}
+        var start = new Date(eventDate);
+
+        console.log(start);
+        console.log(typeof(start));
+
+        var startTime = undefined;
+        var endTime = undefined;
+        if(!eventDate) {
+          startTime = undefined;
+          endTime = undefined;
+        } else {
+          startTime = new Date(start.getFullYear(), start.getMonth(), start.getDate(), start.getHours(), start.getMinutes())
+          endTime = new Date(start.getFullYear(), start.getMonth(), start.getDate(), start.getHours()+1, start.getMinutes())
+        }
+
+        newEvent.id = calendarEvents.events[calendarEvents.events.length-1].id + 1;
+        newEvent.start = startTime;
+        newEvent.end = endTime;
+        newEvent.title = eventTitle;
+        if((isInCalendar(newEvent.title, newEvent.start)) === false) {
+                calendarEvents.events.push(tempObject);
+                console.log("Added New");
+        }
+        calendarEvents.events.push(newEvent);
+        console.log(calendarEvents);
+        $("#calendar").empty();
+        makeCal();
+    }
+
     //create scrollable list of results
     function scrollResults() {
       console.log("Scrolling");
@@ -314,9 +360,6 @@ var calendarEvents = {
       scrollResults();
       findConcerts(location, date, keywords);
     });
-
-
-
 
     $('<div id="message" class="ui-corner-all"></div>').prependTo($('body'));
   });
