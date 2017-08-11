@@ -19,12 +19,9 @@
  * If you're after a monthly calendar plugin, check out this one :
  * http://arshaw.com/fullcalendar/
  *
- * Edited by Taylor on August 10, 2017 :)
  */
 
- /*
-  * Below here is not my business. Leave this.
-  */
+
 
 (function($) {
   // check the jquery version

@@ -68,7 +68,7 @@ header button {
 	box-sizing: border-box;
 	border: 2px solid black;
 	text-align: center;
-	
+
 	white-space: wrap;
   	overflow: hidden;
   	font-size: 0.8em;
@@ -84,7 +84,7 @@ header button {
 	width: 70%;
 	padding-top: 50px;
 	margin: 0 auto;
-	height: 800px;
+	height: 650px;
 	overflow-y: scroll;
 
 }

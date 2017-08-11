@@ -70,18 +70,6 @@ var calendarEvents = {
       }
 
       /**
-       * Append a pre element to the body containing the given message
-       * as its text node. Used to display the results of the API call.
-       *
-       * @param {string} message Text to be placed in pre element.
-       */
-      function appendPre(message) {
-        var pre = document.getElementById('content');
-        var textContent = document.createTextNode(message + '\n');
-        pre.appendChild(textContent);
-      }
-
-      /**
        * Print the summary and start datetime/date of the next ten events in
        * the authorized user's calendar. If no events are found an
        * appropriate message is printed.
@@ -97,7 +85,7 @@ var calendarEvents = {
         }).then(function(response) {
           var events = response.result.items;
 
-         var year = new Date().getFullYear();
+          var year = new Date().getFullYear();
           var month = new Date().getMonth();
           var day = new Date().getDate();
 
@@ -168,34 +156,10 @@ var calendarEvents = {
             $event.css('backgroundColor', '#aaa');
             $event.find('.time').css({'backgroundColor': '#999', 'border':'1px solid #888'});
           }
-        },
-        eventNew: function(calEvent, $event) {
-          displayMessage('<strong>Added event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
-          // alert('You\'ve added a new event. You would capture this event, add the logic for creating a new event with your own fields, data and whatever backend persistence you require.');
-        },
-        eventDrop: function(calEvent, $event) {
-          displayMessage('<strong>Moved Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
-        },
-        eventResize: function(calEvent, $event) {
-          displayMessage('<strong>Resized Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
-        },
-        eventClick: function(calEvent, $event) {
-          displayMessage('<strong>Clicked Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
-        },
-        eventMouseover: function(calEvent, $event) {
-          // displayMessage('<strong>Mouseover Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
-        },
-        eventMouseout: function(calEvent, $event) {
-          // displayMessage('<strong>Mouseout Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
-        },
-        noEvents: function() {
-          displayMessage('There are no events for this week');
         }
       });
     }
-      function displayMessage(message) {
-      $('#message').html(message).fadeIn();
-    }
+
   $(document).ready(function() {
 
     handleClientLoad();
@@ -311,8 +275,4 @@ var calendarEvents = {
       findConcerts(location, date, keywords);
     });
 
-
-
-
-    $('<div id="message" class="ui-corner-all"></div>').prependTo($('body'));
   });
