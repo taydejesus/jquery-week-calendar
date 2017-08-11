@@ -119,8 +119,6 @@ var calendarEvents = {
 
             }
           }
-          console.log(typeof(calendarEvents));
-          console.log(calendarEvents);
           makeCal();
           dateHeaderClicks();
         });
@@ -173,7 +171,9 @@ var calendarEvents = {
       function isInCalendar(title, startTime) {
         for (let i = 0; i < calendarEvents.events.length; i++) {
           if ((calendarEvents.events[i].title === title) & (calendarEvents.events[i].start.getTime() === startTime.getTime())) {
-            console.log("FOUND A MATCH");
+            // console.log("FOUND A MATCH");
+            // console.log(title);
+            // console.log(calendarEvents.events[i].title);
             return true;
           }
         }
@@ -221,8 +221,6 @@ var calendarEvents = {
       }
 
  function makeCal() {
-      console.log("In here, ");
-      console.log(calendarEvents.events);
       $('#calendar').weekCalendar({
         timeslotsPerHour: 6,
         timeslotHeigh: 30,
@@ -240,130 +238,135 @@ var calendarEvents = {
       });
     }
 
-//
-// var apiToken = "t9bI26xcxTEt873igyo9H5bksjK4cgkp96MXnaI3AKQcbBXeOWM";
-var tmKey = "74LKUbkc0pTCkK97eB4GomC5OmRWzld3";
-var baseURL = "https://app.ticketmaster.com/discovery/v2/";
+ function addNewEvent(eventTitle, eventDate) {
+        console.log('here');
+        console.log(eventTitle);
 
-function findConcerts(loc, date, keywords) {
-  console.log('hi2');
-  console.log('date', date);
-  console.log('type of date', typeof(date))
+        var newEvent = {}
+        var start = new Date(eventDate);
 
-  //Using old ajax syntax for compatibility with JQuery widget
-  $.ajax({
-    url: baseURL+"events.json?",
-    data: {
-      keyword: keywords,
-      countryCode: loc,
-      startDateTime: date,
-      apikey: tmKey,
-    },
-    success: function(response) {
+        console.log(start);
+        console.log(typeof(start));
 
-      var events = response._embedded.events;
-      console.log(events);
-      for(let i = 0; i < events.length; i++) {
-        console.log(events[i]);
-
-        var newBand = $("<div class=result>");
-        var newDate = $("<div class=result>");
-        var newGenre = $("<div class=result>");
-        var newVenue = $("<div class=result>");
-        var newSaleStart = $("<div class=result>");
-        var newSaleEnd = $("<div class=result>");
-        var newSeatmap = $("<div class=result>");
-        var newPrice = $("<div class=result>");
-        var newAddEvent = $("<div class=result>");
-        var newPurchase = $("<div class=result>");
-
-        var bandName = events[i].name;
-        var url = events[i].url;
-        var saleStart = new Date(events[i].sales.public.startDateTime);
-        var saleStop = new Date(events[i].sales.public.endDateTime);
-        var eventDate = undefined;
-        if (events[i].dates.start.dateTBD === "true") {
-          eventDate = "TBD"
+        var startTime = undefined;
+        var endTime = undefined;
+        if(!eventDate) {
+          startTime = undefined;
+          endTime = undefined;
         } else {
-          eventDate = new Date(events[i].dates.start.dateTime);
+          startTime = new Date(start.getFullYear(), start.getMonth(), start.getDate(), start.getHours(), start.getMinutes())
+          endTime = new Date(start.getFullYear(), start.getMonth(), start.getDate(), start.getHours()+1, start.getMinutes())
         }
 
-        var viewMap = $("<a>")
-        viewMap.attr("href", events[i].seatmap.staticUrl);
-        viewMap.text("View")
+        newEvent.id = calendarEvents.events[calendarEvents.events.length-1].id + 1;
+        newEvent.start = startTime;
+        newEvent.end = endTime;
+        newEvent.title = eventTitle;
+        if((isInCalendar(newEvent.title, newEvent.start)) === false) {
+                calendarEvents.events.push(newEvent);
+                console.log("Added New");
+        }
+        // calendarEvents.events.push(newEvent);
+        console.log(calendarEvents);
+        $("#calendar").empty();
+        makeCal();
 
-        var buyTicket = $("<a>");
-        buyTicket.attr("href", url);
-        buyTicket.text("Buy Ticket");
-
-        var addCalendar = $("<a>");
-        addCalendar.text("Add to Calendar");
-        addCalendar.click(function() {addNewEvent(newBand, eventDate)});
-
-        var genre = events[i].classifications[0].genre.name;
-        var priceMin = events[i].priceRanges[0].min;
-        var priceMax = events[i].priceRanges[0].max;
-        var venue = events[i]._embedded.venues[0].name;
-
-        var venueLat = events[i]._embedded.venues[0].location.latitude;
-        var venueLong = events[i]._embedded.venues[0].location.longitude;
-        eventDate = `${eventDate.getMonth()}/${eventDate.getDate()}/${eventDate.getFullYear()}  ${eventDate.getHours()}:${eventDate.getMinutes()}`;
-        saleStart = `${saleStart.getMonth()}/${saleStart.getDate()}/${saleStart.getFullYear()}  ${saleStart.getHours()}:${saleStart.getMinutes()}`;
-        saleStop = `${saleStop.getMonth()}/${saleStop.getDate()}/${saleStop.getFullYear()}  ${saleStop.getHours()}:${saleStop.getMinutes()}`;
-
-        newBand.append(bandName);
-        newDate.append(eventDate);
-        newGenre.append(genre);
-        newVenue.append(venue);
-        newSaleStart.append(saleStart);
-        newSaleEnd.append(saleStop);
-        newSeatmap.append(viewMap);
-        newPrice.append($(`<h5>$${priceMin} - $${priceMax}</h5>`));
-        newAddEvent.append(addCalendar);
-        newPurchase.append(buyTicket);
-
-        $(".results").append(newBand);
-        $(".results").append(newDate);
-        $(".results").append(newGenre);
-        $(".results").append(newVenue);
-        $(".results").append(newSaleStart);
-        $(".results").append(newSaleEnd);
-        $(".results").append(newSeatmap);
-        $(".results").append(newPrice);
-        $(".results").append(newAddEvent);
-        $(".results").append(newPurchase);
-      }
     }
-  });
-}
-//
+  $(document).ready(function() {
 
-function addNewEvent(eventTitle, eventDate) {
-    console.log('here');
+    handleClientLoad();
 
-    var newEvent = {}
-    var start = new Date(eventDate);
+    // var apiToken = "t9bI26xcxTEt873igyo9H5bksjK4cgkp96MXnaI3AKQcbBXeOWM";
+    var tmKey = "74LKUbkc0pTCkK97eB4GomC5OmRWzld3";
+    var baseURL = "https://app.ticketmaster.com/discovery/v2/";
 
-    console.log(start);
-    console.log(typeof(start));
+    function findConcerts(loc, date, keywords) {
+      console.log('hi2');
+      //Using old ajax syntax for compatibility with JQuery widget
+      $.ajax({
+        url: baseURL+"events.json?",
+        data: {
+          keyword: keywords,
+          countryCode: loc,
+          startDateTime: date,
+          apikey: tmKey,
+        },
+        success: function(response) {
 
-    var startTime = undefined;
-    var endTime = undefined;
-    if(!eventDate) {
-      startTime = undefined;
-      endTime = undefined;
-    } else {
-      startTime = new Date(start.getFullYear(), start.getMonth(), start.getDate(), start.getHours(), start.getMinutes())
-      endTime = new Date(start.getFullYear(), start.getMonth(), start.getDate(), start.getHours()+1, start.getMinutes())
-    }
+          var events = response._embedded.events;
+          console.log(events);
+          for(let i = 0; i < events.length; i++) {
+            console.log(events[i]);
 
-    newEvent.id = calendarEvents.events[calendarEvents.events.length-1].id + 1;
-    newEvent.start = startTime;
-    newEvent.end = endTime;
-    newEvent.title = eventTitle;
-    if((isInCalendar(newEvent.title, newEvent.start)) === false) {
-            calendarEvents.events.push(tempObject);
-            console.log("Added New");
+            var newBand = $("<div class=result>");
+            var newDate = $("<div class=result>");
+            var newGenre = $("<div class=result>");
+            var newVenue = $("<div class=result>");
+            var newSaleStart = $("<div class=result>");
+            var newSaleEnd = $("<div class=result>");
+            var newSeatmap = $("<div class=result>");
+            var newPrice = $("<div class=result>");
+            var newAddEvent = $("<div class=result>");
+            var newPurchase = $("<div class=result>");
+
+            var bandName = events[i].name;
+            var url = events[i].url;
+            var saleStart = new Date(events[i].sales.public.startDateTime);
+            var saleStop = new Date(events[i].sales.public.endDateTime);
+            var eventDate = undefined;
+            if (events[i].dates.start.dateTBD === "true") {
+              eventDate = "TBD"
+            } else {
+              eventDate = new Date(events[i].dates.start.dateTime);
+            }
+
+            var viewMap = $("<a>")
+            viewMap.attr("href", events[i].seatmap.staticUrl);
+            viewMap.text("View")
+
+            var buyTicket = $("<a>");
+            buyTicket.attr("href", url);
+            buyTicket.text("Buy Ticket");
+
+            var addCalendar = $("<a>");
+            addCalendar.text("Add to Calendar");
+            addCalendar.click(function() {addNewEvent(events[i].name, new Date(events[i].dates.start.dateTime))});
+
+            var genre = events[i].classifications[0].genre.name;
+            var priceMin = events[i].priceRanges[0].min;
+            var priceMax = events[i].priceRanges[0].max;
+            var venue = events[i]._embedded.venues[0].name;
+
+            var venueLat = events[i]._embedded.venues[0].location.latitude;
+            var venueLong = events[i]._embedded.venues[0].location.longitude;
+            eventDate = `${eventDate.getMonth()}/${eventDate.getDate()}/${eventDate.getFullYear()}  ${eventDate.getHours()}:${eventDate.getMinutes()}`;
+            saleStart = `${saleStart.getMonth()}/${saleStart.getDate()}/${saleStart.getFullYear()}  ${saleStart.getHours()}:${saleStart.getMinutes()}`;
+            saleStop = `${saleStop.getMonth()}/${saleStop.getDate()}/${saleStop.getFullYear()}  ${saleStop.getHours()}:${saleStop.getMinutes()}`;
+
+            newBand.append(bandName);
+            newDate.append(eventDate);
+            newGenre.append(genre);
+            newVenue.append(venue);
+            newSaleStart.append(saleStart);
+            newSaleEnd.append(saleStop);
+            newSeatmap.append(viewMap);
+            newPrice.append($(`<h5>$${priceMin} - $${priceMax}</h5>`));
+            newAddEvent.append(addCalendar);
+            newPurchase.append(buyTicket);
+
+            $(".results").append(newBand);
+            $(".results").append(newDate);
+            $(".results").append(newGenre);
+            $(".results").append(newVenue);
+            $(".results").append(newSaleStart);
+            $(".results").append(newSaleEnd);
+            $(".results").append(newSeatmap);
+            $(".results").append(newPrice);
+            $(".results").append(newAddEvent);
+            $(".results").append(newPurchase);
+          }
+        }
+      });
     }
     calendarEvents.events.push(newEvent);
     console.log(calendarEvents);
