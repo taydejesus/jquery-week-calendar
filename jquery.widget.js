@@ -67,6 +67,7 @@ var calendarEvents = {
        */
       function handleSignoutClick(event) {
         gapi.auth2.getAuthInstance().signOut();
+        clearCal();
       }
 
       /**
@@ -126,7 +127,6 @@ var calendarEvents = {
         });
       }
 
-
       function dateHeaderClicks() {
         	var dateHeader = document.getElementsByClassName("wc-day-column-header");
         	for (const date of dateHeader) {
@@ -140,7 +140,11 @@ var calendarEvents = {
       	  }
       }
 
-
+      function clearCal() {
+        $("#calendar").empty();
+        $('.result').remove();
+        $(".results").css('height', '1.8em');
+      }
 
  function makeCal() {
       $('#calendar').weekCalendar({

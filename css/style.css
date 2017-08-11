@@ -2,6 +2,11 @@
 	width: 100%;
 }
 
+header > button {
+	font-size: 0.7em;
+	border-radius: 8px;
+}
+
 h1 {
 	color: #2E4052;
 	display: inline-block;
@@ -28,6 +33,7 @@ button {
 	border-radius: 8px;
 	border: 0;
 	padding: 2em;
+	margin-bottom: 1.6em;
 }
 
 header button {
@@ -46,6 +52,7 @@ header button {
 	margin: 2em;
 }
 .results {
+	height: 1.8em;
 	border: 1px solid black;
 	display: flex;
 	justify-content: center;
