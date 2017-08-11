@@ -272,9 +272,7 @@ var calendarEvents = {
         makeCal();
 
     }
-  $(document).ready(function() {
 
-    handleClientLoad();
 
     // var apiToken = "t9bI26xcxTEt873igyo9H5bksjK4cgkp96MXnaI3AKQcbBXeOWM";
     var tmKey = "74LKUbkc0pTCkK97eB4GomC5OmRWzld3";
@@ -368,11 +366,7 @@ var calendarEvents = {
         }
       });
     }
-    calendarEvents.events.push(newEvent);
-    console.log(calendarEvents);
-    $("#calendar").empty();
-    makeCal();
-}
+
 //
 
 
