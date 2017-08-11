@@ -71,18 +71,6 @@ var calendarEvents = {
       }
 
       /**
-       * Append a pre element to the body containing the given message
-       * as its text node. Used to display the results of the API call.
-       *
-       * @param {string} message Text to be placed in pre element.
-       */
-      function appendPre(message) {
-        var pre = document.getElementById('content');
-        var textContent = document.createTextNode(message + '\n');
-        pre.appendChild(textContent);
-      }
-
-      /**
        * Print the summary and start datetime/date of the next ten events in
        * the authorized user's calendar. If no events are found an
        * appropriate message is printed.
@@ -130,14 +118,56 @@ var calendarEvents = {
               // calendarEvents.events.push(tempObject);
 
             }
-          } else {
-            appendPre('No upcoming events found.');
           }
           console.log(typeof(calendarEvents));
           console.log(calendarEvents);
           makeCal();
           dateHeaderClicks();
         });
+      }
+      function strMonthToInt(month) {
+        month = month.toLowerCase();
+        switch (month) {
+          case "jan":
+            month = "00";
+            break;
+          case "feb":
+            month = "01";
+            break;
+          case "mar":
+            month = "02";
+            break;
+          case "apr":
+            month = "03";
+            break;
+          case "may":
+            month = "04";
+            break;
+          case "jun":
+            month = "05";
+            break;
+          case "jul":
+            month = "06";
+            break;
+          case "aug":
+            month = "07";
+            break;
+          case "sep":
+            month = "08";
+            break;
+          case "oct":
+            month = "09";
+            break;
+          case "nov":
+            month = "10";
+            break;
+          case "dec":
+            month = "11";
+            break;
+          default:
+            alert("Error parsing date. ");
+        }
+        return month;
       }
 
       function isInCalendar(title, startTime) {
@@ -156,9 +186,25 @@ var calendarEvents = {
         		date.addEventListener('click', () => {
         			//get date of clicked item
                 //get text after <br>
-                //parse to date format
-        			//search date
-              //create table
+                var fullText = date.textContent.split(" ");
+
+                //separate month from day
+                var month = fullText[0].substr(fullText[0].length-3, fullText[0].length-1);
+
+                month = strMonthToInt(month);
+                console.log('str int month',month);
+                var day = fullText[1].split(',');
+                day = day[0];
+
+                var year = fullText[2];
+
+                //change to date format
+                var formattedDate = new Date(year, month, day);
+
+                console.log(formattedDate);
+        			//search date and make new table
+                $('.result').remove();
+                findConcerts("", formattedDate, "");
       		  });
       	  }
       }
@@ -185,34 +231,10 @@ var calendarEvents = {
             $event.css('backgroundColor', '#aaa');
             $event.find('.time').css({'backgroundColor': '#999', 'border':'1px solid #888'});
           }
-        },
-        eventNew: function(calEvent, $event) {
-          displayMessage('<strong>Added event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
-          // alert('You\'ve added a new event. You would capture this event, add the logic for creating a new event with your own fields, data and whatever backend persistence you require.');
-        },
-        eventDrop: function(calEvent, $event) {
-          displayMessage('<strong>Moved Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
-        },
-        eventResize: function(calEvent, $event) {
-          displayMessage('<strong>Resized Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
-        },
-        eventClick: function(calEvent, $event) {
-          displayMessage('<strong>Clicked Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
-        },
-        eventMouseover: function(calEvent, $event) {
-          // displayMessage('<strong>Mouseover Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
-        },
-        eventMouseout: function(calEvent, $event) {
-          // displayMessage('<strong>Mouseout Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
-        },
-        noEvents: function() {
-          // displayMessage('There are no events for this week');
         }
       });
     }
-      function displayMessage(message) {
-      $('#message').html(message).fadeIn();
-    }
+
   $(document).ready(function() {
 
     handleClientLoad();
@@ -361,5 +383,4 @@ var calendarEvents = {
       findConcerts(location, date, keywords);
     });
 
-    $('<div id="message" class="ui-corner-all"></div>').prependTo($('body'));
   });
