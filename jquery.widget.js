@@ -117,14 +117,56 @@ var calendarEvents = {
               console.log(endTime);
               // appendPre(event.summary + ' (' + start + ')')
             }
-          } else {
-            appendPre('No upcoming events found.');
           }
           console.log(typeof(calendarEvents));
           console.log(calendarEvents);
           makeCal();
           dateHeaderClicks();
         });
+      }
+      function strMonthToInt(month) {
+        month = month.toLowerCase();
+        switch (month) {
+          case "jan":
+            month = "00";
+            break;
+          case "feb":
+            month = "01";
+            break;
+          case "mar":
+            month = "02";
+            break;
+          case "apr":
+            month = "03";
+            break;
+          case "may":
+            month = "04";
+            break;
+          case "jun":
+            month = "05";
+            break;
+          case "jul":
+            month = "06";
+            break;
+          case "aug":
+            month = "07";
+            break;
+          case "sep":
+            month = "08";
+            break;
+          case "oct":
+            month = "09";
+            break;
+          case "nov":
+            month = "10";
+            break;
+          case "dec":
+            month = "11";
+            break;
+          default:
+            alert("Error parsing date. ");
+        }
+        return month;
       }
 
       function dateHeaderClicks() {
@@ -133,9 +175,25 @@ var calendarEvents = {
         		date.addEventListener('click', () => {
         			//get date of clicked item
                 //get text after <br>
-                //parse to date format
-        			//search date
-              //create table
+                var fullText = date.textContent.split(" ");
+
+                //separate month from day
+                var month = fullText[0].substr(fullText[0].length-3, fullText[0].length-1);
+
+                month = strMonthToInt(month);
+                console.log('str int month',month);
+                var day = fullText[1].split(',');
+                day = day[0];
+
+                var year = fullText[2];
+
+                //change to date format
+                var formattedDate = new Date(year, month, day);
+
+                console.log(formattedDate);
+        			//search date and make new table
+                $('.result').remove();
+                findConcerts("", formattedDate, "");
       		  });
       	  }
       }
