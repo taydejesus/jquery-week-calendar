@@ -67,6 +67,7 @@ var calendarEvents = {
        */
       function handleSignoutClick(event) {
         gapi.auth2.getAuthInstance().signOut();
+        clearCal();
       }
 
       /**
@@ -138,7 +139,6 @@ var calendarEvents = {
         });
       }
 
-
       function dateHeaderClicks() {
         	var dateHeader = document.getElementsByClassName("wc-day-column-header");
         	for (const date of dateHeader) {
@@ -152,7 +152,11 @@ var calendarEvents = {
       	  }
       }
 
-
+      function clearCal() {
+        $("#calendar").empty();
+        $('.result').remove();
+        $(".results").css('height', '1.8em');
+      }
 
  function makeCal() {
       $('#calendar').weekCalendar({
@@ -189,7 +193,7 @@ var calendarEvents = {
           // displayMessage('<strong>Mouseout Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
         },
         noEvents: function() {
-          displayMessage('There are no events for this week');
+          // displayMessage('There are no events for this week');
         }
       });
     }
